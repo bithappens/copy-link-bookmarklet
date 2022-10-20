@@ -1,0 +1,40 @@
+{
+  "name": "copy-link-bookmarklet",
+  "version": "0.0.1",
+  "description": "Bookmarklets for copying a link to the currently open page in various formats.",
+  "source": "src/index.html",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bithappens/copy-link-bookmarklet.git"
+  },
+  "keywords": [
+    "bookmarklet",
+    "markdown"
+  ],
+  "author": {
+    "name": "bithappens",
+    "url": "https://github.com/bithappens/"
+  },
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/bithappens/copy-link-bookmarklet/issues"
+  },
+  "homepage": "https://bithappens.github.com/copy-link-bookmarklet",
+  "dependencies": {
+    "bookmarkleter": "^1.0.1",
+    "simpledotcss": "^2.1.1",
+    "tidy-url": "^1.6.3"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.7.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10"
+  }
+}
