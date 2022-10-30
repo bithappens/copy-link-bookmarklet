@@ -4,8 +4,8 @@
   "description": "Bookmarklets for copying a link to the currently open page in various formats.",
   "source": "src/index.html",
   "scripts": {
-    "dev": "parcel",
-    "build": "parcel build",
+    "dev": "gulp dev",
+    "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,15 +26,19 @@
   },
   "homepage": "https://bithappens.github.com/copy-link-bookmarklet",
   "dependencies": {
-    "bookmarkleter": "^1.0.1",
-    "simpledotcss": "^2.1.1",
-    "tidy-url": "^1.6.3"
+    "simpledotcss": "^2.1.1"
   },
   "devDependencies": {
-    "assert": "^2.0.0",
-    "buffer": "^6.0.3",
-    "parcel": "^2.7.0",
-    "path-browserify": "^1.0.1",
-    "process": "^0.11.10"
+    "bookmarkleter": "^1.0.1",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-connect": "^5.7.0",
+    "gulp-ejs": "^5.1.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-livereload": "^4.0.2",
+    "gulp-purgecss": "^5.0.0",
+    "gulp-rename": "^2.0.0",
+    "tidy-url": "^1.6.3"
   }
 }
