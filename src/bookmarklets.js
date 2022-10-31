@@ -14,7 +14,9 @@ class Bookmarklet {
 }
 
 function simple(format) {
-    const cmd = format.replace("${url}", "'+window.location.href+'").replace("${title}", "'+document.title+'");
+    const cmd = format
+        .replace("${url}", "'+tidyurl.clean(window.location.href).url+'")
+        .replace("${title}", "'+document.title+'");
     const clean = "navigator.clipboard.writeText('" + cmd + "')";
     return bookmarkleter(tidyurl + clean, { minify: true, iife: true });
 }
