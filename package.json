@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -39,7 +40,12 @@
     "gulp-livereload": "^4.0.2",
     "gulp-purgecss": "^5.0.0",
     "gulp-rename": "^2.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
     "tidy-url": "^1.6.3"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
   }
 }
