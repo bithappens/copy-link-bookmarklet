@@ -3,7 +3,7 @@
 Do you keep notes or write somewhere about the websites that you are visiting?
 Then this bookmarklet is for you!
 With just a single click, you copy a formatted link to the current page featuring the title of the page in various formats (e.g. rich text, Markdown, html, wikitext, latex, reStructuredText)
-Furthermore, the copied links will be cleaned to remove the most common tracking IDs. 
+Furthermore, the copied links will be cleaned to remove the most common tracking IDs.
 
 ## Usage and Installation
 
@@ -19,8 +19,8 @@ In case you find a problem or have an idea to further improve this project, plea
 
 ## For Developers
 
-* [gulp.js](https://gulpjs.com/)
-* [chriszarate/bookmarkleter: You have JavaScript. You need a bookmarklet. This does that.](https://github.com/chriszarate/bookmarkleter)
-* [DrKain/tidy-url: A Node Package & Userscript that removes tracking or garbage parameters from URLs making them shorter, cleaner and a lot nicer to read.](https://github.com/DrKain/tidy-url)
-* [Simple.css](https://simplecss.org/)
-* Finally, we have a integration test for our bookmarklet using [cypress](https://www.cypress.io/)
+- [gulp.js](https://gulpjs.com/)
+- [chriszarate/bookmarkleter: You have JavaScript. You need a bookmarklet. This does that.](https://github.com/chriszarate/bookmarkleter)
+- [DrKain/tidy-url: A Node Package & Userscript that removes tracking or garbage parameters from URLs making them shorter, cleaner and a lot nicer to read.](https://github.com/DrKain/tidy-url)
+- [Simple.css](https://simplecss.org/)
+- Finally, we have a integration test for our bookmarklet using [cypress](https://www.cypress.io/)
