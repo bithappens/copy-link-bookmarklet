@@ -9,40 +9,60 @@ const tidyurl = fs.readFileSync(
 );
 
 class Bookmarklet {
-  constructor(format, link, button) {
+  constructor(id, format, link, button) {
+    this.id = id;
     this.format = format;
     this.link = link;
     this.button = button;
   }
 }
 
-function simple(format) {
-  const cmd = format
-    .replace("${url}", "'+tidyurl.clean(window.location.href).url+'")
-    .replace("${title}", "'+document.title+'");
-  const clean = "navigator.clipboard.writeText('" + cmd + "')";
-  return bookmarkleter(tidyurl + clean, { minify: true, iife: true });
+function replace_tokens(pattern) {
+  return pattern
+    .replaceAll("${url}", '"+tidyurl.clean(window.location.href).url+"')
+    .replaceAll("${title}", '"+document.title+"');
+}
+
+function simple(pattern) {
+  const code = replace_tokens(pattern);
+  const cmd = 'navigator.clipboard.writeText("' + code + '")';
+  return bookmarkleter(tidyurl + cmd, { minify: true, iife: true });
+}
+
+function richtext() {
+  const code = fs.readFileSync("src/embedded/richtext.js", "utf8");
+  const cmd = replace_tokens(code);
+  return bookmarkleter(tidyurl + cmd, { minify: true, iife: true });
 }
 
 exports.bookmarklets = [
-  new Bookmarklet("Rich Text", "#", "Copy Rich Link"),
+  new Bookmarklet("rich", "Rich Text", richtext(), "Copy Rich Link"),
   new Bookmarklet(
+    "md",
     "Markdown",
     simple("[${title}](${url})"),
     "Copy Markdown Link"
   ),
   new Bookmarklet(
+    "html",
     "Html",
-    simple('<a href="${url}">${title}</a>'),
+    simple("<a href='${url}'>${title}</a>"),
     "Copy Html Link"
   ),
   new Bookmarklet(
+    "wtext",
     "Wikitext",
     simple("[${url} ${title}])"),
     "Copy Wikitext Link"
   ),
-  new Bookmarklet("reST", simple("`${title} <${url}>`_"), "Copy reST Link"),
   new Bookmarklet(
+    "rest",
+    "reST",
+    simple("`${title} <${url}>`_"),
+    "Copy reST Link"
+  ),
+  new Bookmarklet(
+    "bbc",
     "BBCode",
     simple("[url=${url}]${title}[/url]"),
     "Copy BBCode Link"

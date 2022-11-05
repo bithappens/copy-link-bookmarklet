@@ -1,101 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bookmarklets for copying a link to the current page in various formats."
+    />
+    <!--<meta property="og:image" content="TODO: fancy-manual.gif" />-->
+    <link rel="stylesheet" href="style.css" />
+    <title>Copy Link Bookmarklet</title>
+    <script type="module" src="/main.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Bookmarklets for copying a link to the current page in various formats." />
-  <!--<meta property="og:image" content="TODO: fancy-manual.gif" />-->
-  <link rel="stylesheet" href="style.css">
-  <title>Copy Link Bookmarklet</title>
-</head>
+  <body>
+    <header>
+      <h1>Copy Link Bookmarklet</h1>
+      <p>
+        Bookmarklets for copying a link to the currently open page in various
+        formats.
+      </p>
+    </header>
+    <main>
+      <h2>Usage</h2>
 
-<body>
-  <header>
-    <h1>Copy Link Bookmarklet</h1>
-    <p>Bookmarklets for copying a link to the currently open page in various formats.</p>
-  </header>
-  <main>
-    <h1>Usage</h1>
+      <!-- TODO: Put gif of the bookmarklet -->
 
-    <!-- TODO: Put gif of the bookmarklet -->
+      <ol>
+        <li>Visit any website of your choice</li>
+        <li>Click the bookmarklet</li>
+        <li>Paste the link somewhere</li>
+      </ol>
 
-    <ol>
-      <li>Visit any website of your choice</li>
-      <li>Click the bookmarklet</li>
-      <li>Paste the link somewhere</li>
-    </ol>
+      <div id="func_warning" style="display: none">
+        <h3><mark>Warning:</mark> Browser Incompatibilty</h3>
+        <p>
+          Your browser is not able to put complex MIME types into the clipboard.
+          Hence, some bookmarklets won't work. Maybe there is a fix:
+        </p>
 
+        <details>
+          <summary>Firefox</summary>
+          <p>
+            Enter "about:config" in your address bar > "Accept the Risk and
+            Continue" > Search for
+            <code>dom.events.asyncClipboard.clipboardItem</code> > Set it to
+            <code>true</code>
+            > reload this page
+          </p>
+        </details>
+      </div>
 
-    <h2>Installation</h2>
-    <p>There are two ways to install the bookmarklets.</p>
+      <h2>Installation</h2>
+      <p>There are two ways to install the bookmarklets.</p>
 
-    <h3>A: Fast &amp; Dirty (No favicons, one at a time)</h3>
-    <p>Drag the button with your disered format into your bookmarks toolbar:</p>
+      <h3>A: Fast &amp; Dirty (No favicons, one at a time)</h3>
+      <p>
+        Drag the button with your disered format into your bookmarks toolbar:
+      </p>
 
-    <div id="bml_buttons">
-      <% bookmarklets.forEach(function(bookmarklet) { %>
-        <a href="<%= bookmarklet.link %>"><button>
+      <div id="bml_buttons">
+        <% bookmarklets.forEach(function(bookmarklet) { %>
+        <a href="<%= bookmarklet.link %>" id="bml_<%= bookmarklet.id %>"
+          ><button id="button_<%= bookmarklet.id %>">
             <%= bookmarklet.button %>
-          </button></a>
+          </button></a
+        >
         <% }); %>
-    </div>
+      </div>
 
-    <h3>B: Clean Import (Favicons, all at once)</h3>
+      <h3>B: Clean Import (Favicons, all at once)</h3>
 
-    <h4>Step 1: Choose the desired output formats</h4>
-    <ul id="bml_checklist">
-      <% bookmarklets.forEach(function(bookmarklet) { %>
-        <li><label><input type="checkbox" />
-            <%= bookmarklet.format %>
-          </label></li>
+      <h4>Step 1: Choose the desired output formats</h4>
+      <ul id="bml_checklist">
+        <% bookmarklets.forEach(function(bookmarklet) { %>
+        <li>
+          <label
+            ><input type="checkbox" id="check_<%= bookmarklet.id %>"" /> <%=
+            bookmarklet.format %>
+          </label>
+        </li>
         <% }); %>
-    </ul>
-    <noscript>
-      <pre><b>Warning: Activated Javascript is required for composing the download.</b></pre>
-    </noscript>
-    <a href=""><button>Click to download seleted formats</button></a>
-    <h4>Step 2: Import into the browser</h4>
+      </ul>
+      <noscript>
+        <pre><b>Warning: Activated Javascript is required for composing the download.</b></pre>
+      </noscript>
+      <a href=""><button>Click to download seleted formats</button></a>
+      <h4>Step 2: Import into the browser</h4>
 
-    <details>
-      <summary>Chrome</summary>
-      <p>"Menu" > "Bookmarks" > "Bookmark Manager" > "Menu (top right)" > "Import Bookmarks" > Open the previously
-        downloaded file</p>
-    </details>
+      <details>
+        <summary>Chrome</summary>
+        <p>
+          "Menu" > "Bookmarks" > "Bookmark Manager" > "Menu (top right)" >
+          "Import Bookmarks" > Open the previously downloaded file
+        </p>
+      </details>
 
-    <details>
-      <summary>Firefox</summary>
-      <p>"Menu" > "Bookmarks" > "Manage Bookmarks" > "Import and Backup" > "Import Bookmarks from HTML" > Open
-        the previously downloaded file</p>
-    </details>
+      <details>
+        <summary>Firefox</summary>
+        <p>
+          "Menu" > "Bookmarks" > "Manage Bookmarks" > "Import and Backup" >
+          "Import Bookmarks from HTML" > Open the previously downloaded file
+        </p>
+      </details>
 
-    <details>
-      <summary>Safari</summary>
-      <p>"File" > "Import From" > "Bookmarks HTML File" > Open
-        the previously downloaded file</p>
-    </details>
+      <details>
+        <summary>Safari</summary>
+        <p>
+          "File" > "Import From" > "Bookmarks HTML File" > Open the previously
+          downloaded file
+        </p>
+      </details>
 
-    <details>
-      <summary>Edge</summary>
-      <p>"Menu" > "Settings" > "Import browser data" > Next to "Import browser data now" click "choose what to import" >
-        Select "Favorites or bookmarks HTML file" > "Choose File" > Open the previously downloaded file</p>
-    </details>
+      <details>
+        <summary>Edge</summary>
+        <p>
+          "Menu" > "Settings" > "Import browser data" > Next to "Import browser
+          data now" click "choose what to import" > Select "Favorites or
+          bookmarks HTML file" > "Choose File" > Open the previously downloaded
+          file
+        </p>
+      </details>
 
-    <details>
-      <summary>Opera</summary>
-      <p>Menu" > "Bookmarks" > "Import bookmarks and settings" > Select "Bookmarks HTML file" > "Choose File" > Open
-        the previously downloaded file</p>
-    </details>
+      <details>
+        <summary>Opera</summary>
+        <p>
+          Menu" > "Bookmarks" > "Import bookmarks and settings" > Select
+          "Bookmarks HTML file" > "Choose File" > Open the previously downloaded
+          file
+        </p>
+      </details>
 
-    <h3>Uninstall</h3>
-    <p>Right click on the bookmarklet and select "Delete Bookmark"</p>
-
-  </main>
-  <footer>
-    <p><a href="https://github.com/bithappens/copy-link-bookmarklet">This project is free software</a> and looks
-      forward to your contributions and feedback.</p>
-  </footer>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+      <h3>Uninstall</h3>
+      <p>Right click on the bookmarklet and select "Delete Bookmark"</p>
+    </main>
+    <footer>
+      <p>
+        <a href="https://github.com/bithappens/copy-link-bookmarklet"
+          >This project is free software</a
+        >
+        and looks forward to your contributions and feedback.
+      </p>
+    </footer>
+  </body>
 </html>

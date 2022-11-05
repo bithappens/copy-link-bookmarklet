@@ -8,13 +8,18 @@ const concatCss = require("gulp-concat-css");
 const cleanCSS = require("gulp-clean-css");
 const purgecss = require("gulp-purgecss");
 const connect = require("gulp-connect");
-const bookmarklets = require("./src/bookmarklets.js");
+const ts = require("gulp-typescript");
+const uglify = require("gulp-uglify");
 
-buildpipe = ["html", "css"];
+buildpipe = ["html", "ts", "css"];
 
 // TODO: Better output about progress?
 
 gulp.task("html", function () {
+  // Enforce a reloading of the bookmarks
+  delete require.cache[require.resolve("./src/bookmarklets.js")];
+  const bookmarklets = require("./src/bookmarklets.js");
+
   return gulp
     .src("src/*.ejs")
     .pipe(ejs(bookmarklets))
@@ -32,12 +37,26 @@ gulp.task("css", function () {
       .pipe(
         concatCss("style.css", { includePaths: ["node_modules/simpledotcss"] })
       )
-      // dist/*.html is available if the html task was executed before
-      .pipe(purgecss({ content: ["dist/*.html"] }))
+      // dist/* is available if the other tasks were executed before
+      .pipe(purgecss({ content: ["dist/*.html", "dist/*.js"] }))
       .pipe(cleanCSS())
       .pipe(gulp.dest("dist/"))
       .pipe(connect.reload())
   );
+});
+
+var tsProject = ts.createProject({
+  declaration: false,
+  outFile: "main.js",
+});
+
+gulp.task("ts", function () {
+  return gulp
+    .src("src/*.ts")
+    .pipe(tsProject())
+    .pipe(uglify())
+    .pipe(gulp.dest("dist/"))
+    .pipe(connect.reload());
 });
 
 gulp.task("connect", function () {
@@ -49,7 +68,7 @@ gulp.task("connect", function () {
 });
 
 gulp.task("watch", function () {
-  gulp.watch(["./src/**/*.*"], gulp.series(buildpipe));
+  gulp.watch(["./src/**/*"], gulp.series(buildpipe));
 });
 
 exports.default = gulp.series(buildpipe);
