@@ -1,8 +1,8 @@
 # [Copy Current Page Link Bookmarklet](https://bithappens.github.io/copy-link-bookmarklet)
 
 Do you keep notes or write somewhere about the websites that you are visiting?
-Then this bookmarklet is for you!
-With just a single click, you copy a formatted link to the current page featuring the title of the page in various formats (e.g. rich text, Markdown, html, wikitext, latex, reStructuredText)
+Then these bookmarklets are for you!
+With just a single click, you copy a link to the current page featuring the title of the page in various formats (e.g. rich text, Markdown, html, wikitext, latex, reStructuredText)
 Furthermore, the copied links will be cleaned to remove the most common tracking IDs.
 
 ## Usage and Installation
@@ -24,3 +24,4 @@ In case you find a problem or have an idea to further improve this project, plea
 - [DrKain/tidy-url: A Node Package & Userscript that removes tracking or garbage parameters from URLs making them shorter, cleaner and a lot nicer to read.](https://github.com/DrKain/tidy-url)
 - [Simple.css](https://simplecss.org/)
 - Finally, we have a integration test for our bookmarklet using [cypress](https://www.cypress.io/)
+- [Prettier · Opinionated Code Formatter](https://prettier.io/) for making our code look awesome

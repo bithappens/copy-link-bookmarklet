@@ -1,5 +1,9 @@
 @import "simple.css";
 
+:root {
+  --border: #898ea4;
+}
+
 body > header {
   padding-top: 2rem;
 }
@@ -10,4 +14,12 @@ body > header {
 
 #bml_checklist {
   list-style-type: none;
+}
+
+.notice {
+  background: var(--accent-bg);
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin: 2rem 0;
 }
