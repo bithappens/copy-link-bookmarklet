@@ -9,13 +9,11 @@ const cleanCSS = require("gulp-clean-css");
 const purgecss = require("gulp-purgecss");
 const connect = require("gulp-connect");
 const ts = require("gulp-typescript");
-const uglify = require("gulp-uglify");
+const terser = require("gulp-terser");
 const realFavicon = require("gulp-real-favicon");
 const fs = require("fs");
 
 buildpipe = ["html", "ts", "css"];
-
-// TODO: Better output about progress?
 
 //
 // From: https://realfavicongenerator.net/
@@ -32,73 +30,77 @@ var FAVICON_DATA_FILE = "./src/faviconData.json";
 // you should run it whenever RealFaviconGenerator updates its
 // package (see the check-for-favicon-update task below).
 gulp.task("generate-favicon", function (done) {
-  realFavicon.generateFavicon(
-    {
-      masterPicture: "./node_modules/@tabler/icons/icons/copy.svg",
-      dest: "./dist/icon",
-      iconsPath: "./icon",
-      design: {
-        ios: {
-          pictureAspect: "backgroundAndMargin",
-          backgroundColor: "#f5f7ff",
-          margin: "0%",
-          assets: {
-            ios6AndPriorIcons: false,
-            ios7AndLaterIcons: false,
-            precomposedIcons: false,
-            declareOnlyDefaultIcon: true,
-          },
-        },
-        desktopBrowser: {
-          design: "raw",
-        },
-        windows: {
-          pictureAspect: "whiteSilhouette",
-          backgroundColor: "#da532c",
-          onConflict: "override",
-          assets: {
-            windows80Ie10Tile: false,
-            windows10Ie11EdgeTiles: {
-              small: true,
-              medium: true,
-              big: true,
-              rectangle: true,
+  if (!fs.existsSync("./dist/icon/favicon.ico")) {
+    realFavicon.generateFavicon(
+      {
+        masterPicture: "./node_modules/@tabler/icons/icons/copy.svg",
+        dest: "./dist/icon",
+        iconsPath: "./icon",
+        design: {
+          ios: {
+            pictureAspect: "backgroundAndMargin",
+            backgroundColor: "#f5f7ff",
+            margin: "0%",
+            assets: {
+              ios6AndPriorIcons: false,
+              ios7AndLaterIcons: false,
+              precomposedIcons: false,
+              declareOnlyDefaultIcon: true,
             },
           },
-        },
-        androidChrome: {
-          pictureAspect: "noChange",
-          themeColor: "#ffffff",
-          manifest: {
-            name: "Copy Link Bookmarklet",
-            display: "standalone",
-            orientation: "notSet",
+          desktopBrowser: {
+            design: "raw",
+          },
+          windows: {
+            pictureAspect: "whiteSilhouette",
+            backgroundColor: "#da532c",
             onConflict: "override",
-            declared: true,
+            assets: {
+              windows80Ie10Tile: false,
+              windows10Ie11EdgeTiles: {
+                small: true,
+                medium: true,
+                big: true,
+                rectangle: true,
+              },
+            },
           },
-          assets: {
-            legacyIcon: false,
-            lowResolutionIcons: false,
+          androidChrome: {
+            pictureAspect: "noChange",
+            themeColor: "#ffffff",
+            manifest: {
+              name: "Copy Link Bookmarklet",
+              display: "standalone",
+              orientation: "notSet",
+              onConflict: "override",
+              declared: true,
+            },
+            assets: {
+              legacyIcon: false,
+              lowResolutionIcons: false,
+            },
+          },
+          safariPinnedTab: {
+            pictureAspect: "silhouette",
+            themeColor: "#5bbad5",
           },
         },
-        safariPinnedTab: {
-          pictureAspect: "silhouette",
-          themeColor: "#5bbad5",
+        settings: {
+          scalingAlgorithm: "Mitchell",
+          errorOnImageTooSmall: false,
+          readmeFile: false,
+          htmlCodeFile: false,
+          usePathAsIs: false,
         },
+        markupFile: FAVICON_DATA_FILE,
       },
-      settings: {
-        scalingAlgorithm: "Mitchell",
-        errorOnImageTooSmall: false,
-        readmeFile: false,
-        htmlCodeFile: false,
-        usePathAsIs: false,
-      },
-      markupFile: FAVICON_DATA_FILE,
-    },
-    function () {
-      done();
-    }
-  );
+      function () {
+        done();
+      }
+    );
+  } else {
+    done();
+  }
 });
 
 // Inject the favicon markups in your HTML pages. You should run
@@ -143,10 +145,11 @@ gulp.task("html", function () {
   // Enforce a reloading of the bookmarks
   delete require.cache[require.resolve("./src/bookmarklets.js")];
   const bookmarklets = require("./src/bookmarklets.js");
+  const favicon = fs.readFileSync("./dist/icon/favicon-16x16.png", "base64");
 
   return gulp
     .src("src/*.ejs")
-    .pipe(ejs(bookmarklets))
+    .pipe(ejs({ bookmarklets: bookmarklets.bookmarklets, favicon: favicon }))
     .pipe(rename({ extname: ".html" }))
     .pipe(gulp.src("src/*.html", { passthrough: true }))
     .pipe(
@@ -176,6 +179,7 @@ gulp.task("css", function () {
 
 var tsProject = ts.createProject({
   declaration: false,
+  target: "ES6",
   outFile: "main.js",
 });
 
@@ -183,7 +187,7 @@ gulp.task("ts", function () {
   return gulp
     .src("src/*.ts")
     .pipe(tsProject())
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(gulp.dest("dist/"))
     .pipe(connect.reload());
 });

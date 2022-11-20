@@ -10,7 +10,7 @@
     <!--<meta property="og:image" content="TODO: fancy-manual.gif" />-->
     <link rel="stylesheet" href="style.css" />
     <title>Copy Link Bookmarklet</title>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="main.js"></script>
   </head>
 
   <body>
@@ -88,8 +88,12 @@
         <% bookmarklets.forEach(function(bookmarklet) { %>
         <li>
           <label
-            ><input type="checkbox" id="check_<%= bookmarklet.id %>" /> <%=
-            bookmarklet.format %>
+            ><input
+              type="checkbox"
+              class="bml_check"
+              id="check_<%= bookmarklet.id %>"
+            />
+            <%= bookmarklet.format %>
           </label>
         </li>
         <% }); %>
@@ -97,7 +101,16 @@
       <noscript>
         <pre><b>Warning: Activated Javascript is required for composing the download.</b></pre>
       </noscript>
-      <a href=""><button>Click to download selected formats</button></a>
+      <a id="import_a" href="#"
+        ><button id="import_button" disabled>
+          Click to download selected formats
+        </button></a
+      >
+      <img
+        id="favicon16"
+        src="data:image/png;base64,<%= favicon %>"
+        style="display: none"
+      />
       <h4>Step 2: Import into the browser</h4>
 
       <details>
