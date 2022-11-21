@@ -1,0 +1,39 @@
+name: Build and Publish the github page
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup node environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: "npm"
+      - name: Install the project
+        run: npm clean-install
+      - name: Build the webpage
+        run: npm run build
+      - name: Upload page artifacts
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "./dist/"
+
+  publish:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
