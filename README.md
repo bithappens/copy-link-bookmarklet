@@ -16,12 +16,3 @@ Please visit [the project webpage](https://bithappens.github.io/copy-link-bookma
 The best way to support this project is to spread the word.
 Please share it with your colleagues and friends or simply leave a star in this repo.
 In case you find a problem or have an idea to further improve this project, please open an issue.
-
-## For Developers
-
-- [gulp.js](https://gulpjs.com/)
-- [chriszarate/bookmarkleter: You have JavaScript. You need a bookmarklet. This does that.](https://github.com/chriszarate/bookmarkleter)
-- [DrKain/tidy-url: A Node Package & Userscript that removes tracking or garbage parameters from URLs making them shorter, cleaner and a lot nicer to read.](https://github.com/DrKain/tidy-url)
-- [Simple.css](https://simplecss.org/)
-- Finally, we have a integration test for our bookmarklet using [cypress](https://www.cypress.io/)
-- [Prettier · Opinionated Code Formatter](https://prettier.io/) for making our code look awesome
