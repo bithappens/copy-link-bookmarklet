@@ -50,7 +50,7 @@ function RefreshImportFile(flags: boolean[]): void {
 
 function BuildImportFile(flags: boolean[]): File {
   const now = Math.floor(Date.now() / 1000);
-  const favicon = (<HTMLImageElement>document.getElementById("favicon16")!).src;
+  const favicon = (<HTMLImageElement>document.getElementById("favicon32")!).src;
   const favlinks = <Array<HTMLAnchorElement>>(
     Array.from(
       (<HTMLAnchorElement>document.getElementById("bml_buttons"))!.children
@@ -79,7 +79,7 @@ function BuildImportFile(flags: boolean[]): File {
               `LAST_VISIT="${now}" ` +
               `ICON="${favicon}" ` +
               `LAST_MODIFIED="${now}" ` +
-              'ICON_URI="https://bithappens.github.io/copy-link-bookmarklet/icon/favicon.ico">' +
+              'ICON_URI="https://bithappens.github.io/copy-link-bookmarklet/icon/favicon-32x32.png">' +
               `${a.innerText}</A></DT>`
           )
       )

@@ -145,7 +145,7 @@ gulp.task("html", function () {
   // Enforce a reloading of the bookmarks
   delete require.cache[require.resolve("./src/bookmarklets.js")];
   const bookmarklets = require("./src/bookmarklets.js");
-  const favicon = fs.readFileSync("./dist/icon/favicon-16x16.png", "base64");
+  const favicon = fs.readFileSync("./dist/icon/favicon-32x32.png", "base64");
 
   return gulp
     .src("src/*.ejs")
