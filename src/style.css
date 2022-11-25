@@ -8,6 +8,10 @@ body > header {
   padding-top: 2rem;
 }
 
+body > header p {
+  max-width: fit-content;
+}
+
 #bml_buttons button {
   margin: 0.5rem;
 }
