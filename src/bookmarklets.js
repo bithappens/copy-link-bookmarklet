@@ -17,15 +17,19 @@ class Bookmarklet {
   }
 }
 
-function replace_tokens(pattern) {
-  return pattern
+function replace_tokens(code) {
+  return code
     .replaceAll("${url}", '"+tidyurl.clean(window.location.href).url+"')
     .replaceAll("${title}", '"+document.title+"');
 }
 
+function replace_clipboard(code, pattern) {
+  return code.replaceAll("${clipboard}", pattern);
+}
+
 function simple(pattern) {
-  const code = replace_tokens(pattern);
-  const cmd = 'navigator.clipboard.writeText("' + code + '")';
+  const code = fs.readFileSync("src/embedded/simple.js", "utf8");
+  const cmd = replace_tokens(replace_clipboard(code, pattern));
   return bookmarkleter(tidyurl + cmd, { minify: true, iife: true });
 }
 
