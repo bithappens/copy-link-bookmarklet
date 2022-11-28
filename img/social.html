@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Social Media Preview</title>
+    <style>
+      :root {
+        --sans-font: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+          "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica,
+          "Helvetica Neue", sans-serif;
+        --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono",
+          monospace;
+      }
+      body {
+        background-color: #f5f7ff;
+        color: #212121;
+        font-family: var(--sans-font);
+      }
+      #frame {
+        background-color: #f5f7ff;
+        width: 640px;
+        height: 320px;
+        margin: auto;
+      }
+      h1 {
+        padding: 1.6em 0 0 0;
+        text-align: center;
+      }
+      ol {
+        font-size: 120%;
+        margin-top: -0.9em;
+        margin-left: 3em;
+      }
+      ol > li {
+        padding: 0.21em 0;
+      }
+      #bookmarklet {
+        border-radius: 15px;
+        padding: 3px 10px 3px;
+        background-color: #e6e5e4;
+        display: inline-block;
+      }
+      #bookmarklet img {
+        height: 20px;
+        display: inline-block;
+        margin-top: 3px;
+        margin-bottom: -3px;
+      }
+      #address {
+        display: inline-block;
+        font-family: var(--mono-font);
+        border-radius: 3px;
+        padding: 0 45px 6px 0;
+        min-width: 390px;
+        border: 2px solid lightgray;
+        background-color: white;
+      }
+      #address object {
+        margin-top: 3px;
+        margin-left: 4px;
+        margin-bottom: -6px;
+      }
+      #clipboard {
+        display: inline-block;
+        margin-bottom: -4px;
+        margin-right: 3px;
+      }
+      #pasted {
+        text-align: center;
+        margin-top: -18px;
+        background-color: white;
+        padding: 6px 10px 100px 0;
+        font-family: var(--mono-font);
+        font-size: 120%;
+      }
+      #pointer {
+        position: absolute;
+        margin-top: 25px;
+        margin-left: -105px;
+        height: 25px;
+      }
+      #writer {
+        display: inline-block;
+        margin-bottom: -9px;
+        margin-right: -5px;
+        height: 26px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="frame">
+      <h1>The easiest way to copy a page link:</h1>
+      <ol>
+        <li>
+          Visit any page, for example:<br />
+          <span id="address">
+            <object
+              data="../node_modules/@tabler/icons/icons/world-www.svg"
+              type="image/svg+xml"
+              onload="this.contentDocument.querySelector('svg').style.strokeWidth = '1.5';"
+            ></object>
+            https://example.org/</span
+          >
+        </li>
+        <li>
+          Click our bookmarklet:
+          <span id="bookmarklet">
+            <img src="../dist/icon/safari-pinned-tab.svg" />
+            Copy Markdown Link
+          </span>
+          <object
+            id="pointer"
+            data="../node_modules/@tabler/icons/icons/pointer.svg"
+            type="image/svg+xml"
+            onload="this.contentDocument.querySelector('.icon > path:nth-child(2)').style = 'fill: white'"
+          ></object>
+        </li>
+        <li>
+          <object
+            id="clipboard"
+            data="../node_modules/@tabler/icons/icons/clipboard-copy.svg"
+            type="image/svg+xml"
+          ></object
+          >Paste the link somewhere:
+        </li>
+      </ol>
+      <div id="pasted">
+        <span>
+          <object
+            id="writer"
+            data="../node_modules/@tabler/icons/icons/cursor-text.svg"
+            type="image/svg+xml"
+          ></object
+          >[Example Domain](https://example.org/)
+        </span>
+      </div>
+    </div>
+  </body>
+</html>
