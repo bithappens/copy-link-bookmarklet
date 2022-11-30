@@ -66,6 +66,12 @@ exports.bookmarklets = [
     "Copy reST Link"
   ),
   new Bookmarklet(
+    "latex",
+    "LaTeX",
+    simple("\\\\href{${url}}{${title}}"),
+    "Copy LaTeX Link"
+  ),
+  new Bookmarklet(
     "bbc",
     "BBCode",
     simple("[url=${url}]${title}[/url]"),
