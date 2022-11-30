@@ -22,8 +22,12 @@ body > header p {
 
 .notice {
   background: var(--accent-bg);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: 5px;
-  padding: 1.5rem;
-  margin: 2rem 0;
+  overflow: hidden;
+}
+
+.notice > img {
+  margin-top: -25px;
+  margin-bottom: -20px;
 }

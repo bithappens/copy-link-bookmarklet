@@ -2,7 +2,7 @@
   "name": "copy-link-bookmarklet",
   "version": "0.0.1",
   "description": "Bookmarklets for copying a link to the currently open page in various formats.",
-  "source": "src/index.html",
+  "private": true,
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp",
@@ -38,6 +38,7 @@
     "gulp-connect": "^5.7.0",
     "gulp-ejs": "^5.1.0",
     "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^7.0.1",
     "gulp-livereload": "^4.0.2",
     "gulp-purgecss": "^5.0.0",
     "gulp-real-favicon": "^0.3.2",

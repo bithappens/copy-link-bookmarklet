@@ -8,12 +8,13 @@ const concatCss = require("gulp-concat-css");
 const cleanCSS = require("gulp-clean-css");
 const purgecss = require("gulp-purgecss");
 const connect = require("gulp-connect");
+const imagemin = require("gulp-imagemin");
 const ts = require("gulp-typescript");
 const terser = require("gulp-terser");
 const realFavicon = require("gulp-real-favicon");
 const fs = require("fs");
 
-buildpipe = ["html", "ts", "css"];
+buildpipe = ["html", "ts", "css", "img"];
 
 //
 // From: https://realfavicongenerator.net/
@@ -175,6 +176,13 @@ gulp.task("css", function () {
       .pipe(gulp.dest("dist/"))
       .pipe(connect.reload())
   );
+});
+
+gulp.task("img", function () {
+  return gulp
+    .src(["img/*.png", "img/*.jpg", "img/*.gif"])
+    .pipe(imagemin())
+    .pipe(gulp.dest("dist/img"));
 });
 
 var tsProject = ts.createProject({
