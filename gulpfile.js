@@ -155,7 +155,8 @@ gulp.task("html", function () {
     .pipe(gulp.src("src/*.html", { passthrough: true }))
     .pipe(
       realFavicon.injectFaviconMarkups(
-        JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code
+        JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code,
+        { keep: 'meta[property="og:image"]' }
       )
     )
     .pipe(htmlmin({ collapseWhitespace: true }))
